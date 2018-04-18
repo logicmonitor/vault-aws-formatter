@@ -146,7 +146,11 @@ Inject AWS credentials into the AWS credentials file with a custom profile name:
 def main():
     args = setup_args()
 
-    data = json.load(sys.stdin)
+    try:
+        data = json.load(sys.stdin)
+    except:
+        fail('Unable to parse JSON')
+
     validate(data)
     data = format_data(data)
 
